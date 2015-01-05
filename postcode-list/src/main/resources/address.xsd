@@ -1,0 +1,70 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://spring.io/guides/gs-producing-web-service"
+           targetNamespace="http://spring.io/guides/gs-producing-web-service" elementFormDefault="qualified">
+
+    <xs:element name="getAddressRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="postcode" type="xs:string"/>
+                <xs:element name="country" type="xs:string"/>
+                <xs:element name="type" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="AddressList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element type="tns:Address" name="Address" maxOccurs="unbounded" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+    <xs:complexType name="Address">
+        <xs:sequence>
+            <xs:element type="xs:string" name="Postcode" />
+            <xs:element type="tns:Building" name="Building" />
+			<xs:element type="tns:Road" name="Road" />
+            <xs:element type="tns:Locality" name="Locality" minOccurs="0" />
+            <xs:element type="xs:string" name="Town" />
+            <xs:element type="tns:Organization" name="Organization" minOccurs="0" />
+            <xs:element name="country" type="tns:country" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="Building">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:string" name="name" use="optional" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Road">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:string" name="Street" use="optional" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Locality">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:string" name="Area" use="optional" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Organization">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:string" name="Department" use="optional" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+    <xs:complexType name="country">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:string" name="code" use="optional" />
+				<xs:attribute type="xs:string" name="code3" use="optional" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>
